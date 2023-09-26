@@ -3,12 +3,12 @@ import { Button, Input } from "@material-tailwind/react";
 import Airtable  from "airtable";
 import backendUrl from "./const/backendUrl";
 import { useState } from "react";
+import DataCard from "./components/DataCard";
+import ScoreCard from "./components/ScoreCard";
 
 const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
   `${backendUrl.airtableBase}`
 );
-
-
 
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
 
 
   const [searchText,setSearchText] = useState("");
+  const [studentData,setStudentData] = useState([]);
 
   const getStudent = async (search) => {
 
@@ -26,8 +27,8 @@ function App() {
       })
       .eachPage(
         (record, fetchNextPage) => {
-          // setResult(records);
-          console.log(record)
+          setStudentData(record[0].fields);
+          console.log(record[0].fields)
           // setHeading(search);
           fetchNextPage();
         },
@@ -51,6 +52,8 @@ function App() {
       <Input type="text" label="Chest No*" onChange={(e) => {setSearchText(e.target.value)}} />
       <Button className="w-full bg-blue-900" onClick={()=>{getStudent(searchText)}} >Search</Button>
       </div>
+      <DataCard data={studentData}/>
+      <ScoreCard/>
     </div>
   )
 }
