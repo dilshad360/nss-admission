@@ -66,7 +66,7 @@ function App() {
       <div className="py-4 flex items-center gap-2">
       <img src={nsslogo} width={60} alt="nss_logo" />
       <div className="">
-      <h4 className="text-2xl font-bold">NSS Admission</h4>
+      <h4 className="text-2xl font-bold">NSS ADMISSION</h4>
       <h5 className="text-1xl font-semibold">Score System</h5>
       </div>
       </div>
