@@ -1,5 +1,5 @@
 // import nsslogo from "./assets/nss_logo.png"
-import { Button, Input } from "@material-tailwind/react";
+import { Button, Input , Spinner ,Alert } from "@material-tailwind/react";
 import Airtable  from "airtable";
 import backendUrl from "./const/backendUrl";
 import { useState } from "react";
@@ -18,8 +18,14 @@ function App() {
   const [searchText,setSearchText] = useState("");
   const [studentID,setStudentID] = useState("");
   const [studentData,setStudentData] = useState([]);
+  const [loading,setLoading] = useState(false);
+  const [alert,setAlert] = useState(false);
 
   const getStudent = async (search) => {
+    if(searchText === "") return
+    setStudentData([])
+    setAlert(false)
+    setLoading(true)
     base("Students")
       .select({
         view: "Data",
@@ -27,18 +33,26 @@ function App() {
       })
       .eachPage(
         (record, fetchNextPage) => {
+          if(record.length === 0 ) { 
+            setAlert(true)
+            setLoading(false)
+            return
+          }
           setStudentData(record[0].fields);
           setStudentID(record[0].id);
           // setHeading(search);
           fetchNextPage();
+          setLoading(false)
         },
         function done(err) {
           if (err) {
             console.error(err);
+            setLoading(false)
             return;
           }
         }
       );
+      
   };
 
   return (
@@ -49,11 +63,19 @@ function App() {
       <h5 className="text-1xl font-semibold">Score System</h5>
       </div>
       <div className="w-full flex flex-col gap-2">
-      <Input type="text" label="Chest No*" onChange={(e) => {setSearchText(e.target.value)}} />
+      <Input type="text" label="Chest No" onChange={(e) => {setSearchText(e.target.value)}} />
       <Button className="w-full bg-blue-900" onClick={()=>{getStudent(searchText)}} >Search</Button>
       </div>
+      {loading && (<Spinner className="mt-4"/>)}
+
+        {alert && (<p className="text-sm font-semibold my-1">No Data Found</p>)}
+
+      {studentData.Name &&(<>
       <DataCard data={studentData}/>
-      <ScoreCard base={base} stuid={studentID}/>
+      <ScoreCard base={base} stuid={studentID} data={studentData}/>
+      </>
+      )
+  }
     </div>
   )
 }

@@ -5,49 +5,128 @@ import {
     Input,
     Button,
 } from "@material-tailwind/react";
+import { useState } from "react";
 
-function ScoreCard({base , stuid}) {
-
-  
+function ScoreCard({ base, stuid, data }) {
+    const [debateScore, setDebateScore] = useState(data.DEBATE_SCORE);
+    const [grpActScore, setGrpActScore] = useState(data.GROUP_SCORE);
+    const [stagePerScore, setStagePerScore] = useState(data.STAGE_SCORE);
+    const [overallScore, setOverallScore] = useState(data.OVERALL_SCORE);
+    const [debateOpinion, setDebateOpinion] = useState(data.DEBATE_OPINION);
+    const [grpActOpinion, setGrpActOpinion] = useState(data.GROUP_OPINION);
+    const [stagePerOpinion, setStagePerOpinion] = useState(data.STAGE_OPINION);
+    const [overallOpinion, setOverallOpinion] = useState(data.OVERALL_OPINION);
 
     const submitScores = async () => {
-        console.log("ss");
-        base('Students').update(`${stuid}`, {
-            "DEBATE_SCORE": "23BCAA295"
-          }, function(err, record) {
-            if (err) {
-              console.error(err);
-              return;
+        base("Students").update(
+            `${stuid}`,
+            {
+                DEBATE_SCORE: `${debateScore}`,
+                GROUP_SCORE: `${grpActScore}`,
+                STAGE_SCORE: `${stagePerScore}`,
+                OVERALL_SCORE: `${overallScore}`,
+                DEBATE_OPINION: `${debateOpinion}`,
+                GROUP_OPINION: `${grpActOpinion}`,
+                STAGE_OPINION: `${stagePerOpinion}`,
+                OVERALL_OPINION: `${overallOpinion}`,
+            },
+            function (err) {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
             }
-            console.log(record.get('DEBATE_SCORE'));
-          });
-      };
-
+        );
+        console.log("ok");
+    };
 
     return (
         <Card className="mt-6 w-full">
             <CardBody className="">
                 <Typography variant="h5" className="mb-3" color="blue-gray">
-                    Score
+                    Scores Submission
                 </Typography>
                 <div className="flex gap-4 flex-col">
                     <div className="flex flex-col gap-2">
-                        <Input type="number" label="Debate Score" />
-                        <Input type="text" label="Debate Opinion" />
+                        <Input
+                            type="number"
+                            onChange={(e) => {
+                                setDebateScore(e.target.value);
+                            }}
+                            label="Debate Score"
+                            value={debateScore}
+                        />
+                        <Input
+                            type="text"
+                            onChange={(e) => {
+                                setDebateOpinion(e.target.value);
+                            }}
+                            label="Debate Opinion"
+                            value={debateOpinion}
+                        />
                     </div>
                     <div className="flex flex-col gap-2">
-                        <Input type="number" label="Group Activity Score" />
-                        <Input type="text" label="Group Activity Opinion" />
+                        <Input
+                            type="number"
+                            onChange={(e) => {
+                                setGrpActScore(e.target.value);
+                            }}
+                            label="Group Activity Score"
+                            value={grpActScore}
+                        />
+                        <Input
+                            type="text"
+                            onChange={(e) => {
+                                setGrpActOpinion(e.target.value);
+                            }}
+                            label="Group Activity Opinion"
+                            value={grpActOpinion}
+                        />
                     </div>
                     <div className="flex flex-col gap-2">
-                        <Input type="number" label="Stage Perfotmance Score" />
-                        <Input type="text" label="Stage Perfotmance Opinion" />
+                        <Input
+                            type="number"
+                            onChange={(e) => {
+                                setStagePerScore(e.target.value);
+                            }}
+                            label="Stage Performance Score"
+                            value={stagePerScore}
+                        />
+                        <Input
+                            type="text"
+                            onChange={(e) => {
+                                setStagePerOpinion(e.target.value);
+                            }}
+                            label="Stage Performance Opinion"
+                            value={stagePerOpinion}
+                        />
                     </div>
                     <div className="flex flex-col gap-2">
-                        <Input type="number" label="Overall Score" />
-                        <Input type="text" label="Opinion" />
+                        <Input
+                            type="number"
+                            onChange={(e) => {
+                                setOverallScore(e.target.value);
+                            }}
+                            label="Overall Score"
+                            value={overallScore}
+                        />
+                        <Input
+                            type="text"
+                            onChange={(e) => {
+                                setOverallOpinion(e.target.value);
+                            }}
+                            label="Overall Opinion"
+                            value={overallOpinion}
+                        />
                     </div>
-                    <Button className="w-full bg-green-500 mt-2" onClick={()=>{submitScores()}}>Submit</Button>
+                    <Button
+                        className="w-full bg-green-500 mt-2"
+                        onClick={() => {
+                            submitScores();
+                        }}
+                    >
+                        Submit
+                    </Button>
                 </div>
             </CardBody>
         </Card>
