@@ -7,7 +7,7 @@ import {
 } from "@material-tailwind/react";
 import { useState } from "react";
 
-function ScoreCard({ base, stuid, data }) {
+function ScoreCard({ base, stuid, data, clear }) {
     const [debateScore, setDebateScore] = useState(data.DEBATE_SCORE);
     const [grpActScore, setGrpActScore] = useState(data.GROUP_SCORE);
     const [stagePerScore, setStagePerScore] = useState(data.STAGE_SCORE);
@@ -34,10 +34,11 @@ function ScoreCard({ base, stuid, data }) {
                 if (err) {
                     console.error(err);
                     return;
+                } else {
+                    clear()
                 }
             }
         );
-        console.log("ok");
     };
 
     return (
