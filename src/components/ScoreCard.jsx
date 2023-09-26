@@ -8,14 +8,14 @@ import {
 import { useState } from "react";
 
 function ScoreCard({ base, stuid, data, clear }) {
-    const [debateScore, setDebateScore] = useState(data.DEBATE_SCORE);
-    const [grpActScore, setGrpActScore] = useState(data.GROUP_SCORE);
-    const [stagePerScore, setStagePerScore] = useState(data.STAGE_SCORE);
-    const [overallScore, setOverallScore] = useState(data.OVERALL_SCORE);
-    const [debateOpinion, setDebateOpinion] = useState(data.DEBATE_OPINION);
-    const [grpActOpinion, setGrpActOpinion] = useState(data.GROUP_OPINION);
-    const [stagePerOpinion, setStagePerOpinion] = useState(data.STAGE_OPINION);
-    const [overallOpinion, setOverallOpinion] = useState(data.OVERALL_OPINION);
+    const [debateScore, setDebateScore] = useState(data.DEBATE_SCORE !== undefined ? data.DEBATE_SCORE : '');
+    const [grpActScore, setGrpActScore] = useState(data.GROUP_SCORE !== undefined ? data.GROUP_SCORE : '');
+    const [stagePerScore, setStagePerScore] = useState(data.STAGE_SCORE !== undefined ? data.STAGE_SCORE : '');
+    const [overallScore, setOverallScore] = useState(data.OVERALL_SCORE !== undefined ? data.OVERALL_SCORE : '');
+    const [debateOpinion, setDebateOpinion] = useState(data.DEBATE_OPINION !== undefined ? data.DEBATE_OPINION : '');
+    const [grpActOpinion, setGrpActOpinion] = useState(data.GROUP_OPINION !== undefined ? data.GROUP_OPINION : '');
+    const [stagePerOpinion, setStagePerOpinion] = useState(data.STAGE_OPINION !== undefined ? data.STAGE_OPINION : '');
+    const [overallOpinion, setOverallOpinion] = useState(data.OVERALL_OPINION !== undefined ? data.OVERALL_OPINION : '');
 
     const submitScores = async () => {
         base("Students").update(
@@ -38,8 +38,10 @@ function ScoreCard({ base, stuid, data, clear }) {
                     clear()
                 }
             }
-        );
+        )
     };
+
+    
 
     return (
         <Card className="mt-6 w-full">
