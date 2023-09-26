@@ -16,10 +16,10 @@ function App() {
 
 
   const [searchText,setSearchText] = useState("");
+  const [studentID,setStudentID] = useState("");
   const [studentData,setStudentData] = useState([]);
 
   const getStudent = async (search) => {
-
     base("Students")
       .select({
         view: "Data",
@@ -28,7 +28,7 @@ function App() {
       .eachPage(
         (record, fetchNextPage) => {
           setStudentData(record[0].fields);
-          console.log(record[0].fields)
+          setStudentID(record[0].id);
           // setHeading(search);
           fetchNextPage();
         },
@@ -53,7 +53,7 @@ function App() {
       <Button className="w-full bg-blue-900" onClick={()=>{getStudent(searchText)}} >Search</Button>
       </div>
       <DataCard data={studentData}/>
-      <ScoreCard/>
+      <ScoreCard base={base} stuid={studentID}/>
     </div>
   )
 }
