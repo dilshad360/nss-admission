@@ -8,6 +8,13 @@ import {
 import { useState } from "react";
 
 function ScoreCard({ base, stuid, data, clear }) {
+
+    const [communication, setCommunication] = useState(data.COMMUNICATON !== undefined ? data.COMMUNICATON : '');
+    const [dedication, setDedication] = useState(data.DEDICATION !== undefined ? data.DEDICATION : '');
+    const [skillAchieve, setSkillAchieve] = useState(data.SKILL_ACIEVEMENT !== undefined ? data.SKILL_ACIEVEMENT : '');
+    const [interviewOverall, setInterviewOverall] = useState(data.INTERVIEW_OVERALL !== undefined ? data.INTERVIEW_OVERALL : '');
+    
+
     const [debateScore, setDebateScore] = useState(data.DEBATE_SCORE !== undefined ? data.DEBATE_SCORE : '');
     const [grpActScore, setGrpActScore] = useState(data.GROUP_SCORE !== undefined ? data.GROUP_SCORE : '');
     const [stagePerScore, setStagePerScore] = useState(data.STAGE_SCORE !== undefined ? data.STAGE_SCORE : '');
@@ -21,6 +28,11 @@ function ScoreCard({ base, stuid, data, clear }) {
         base("Students").update(
             `${stuid}`,
             {
+                COMMUNICATION: `${communication}`,
+                DEDICATION: `${dedication}`,
+                SKILL_ACHIEVEMENT: `${skillAchieve}`,
+                INTERVIEW_OVERALL: `${interviewOverall}`,
+
                 DEBATE_SCORE: `${debateScore}`,
                 GROUP_SCORE: `${grpActScore}`,
                 STAGE_SCORE: `${stagePerScore}`,
@@ -41,13 +53,50 @@ function ScoreCard({ base, stuid, data, clear }) {
         )
     };
 
-    
+
 
     return (
         <Card className="mt-6 w-full">
             <CardBody className="">
                 <Typography variant="h5" className="mb-3" color="blue-gray">
-                    Scores Submission
+                    Interview Section
+                </Typography>
+                <div className="flex gap-2 flex-col mb-4">
+                    <Input
+                        type="text"
+                        onChange={(e) => {
+                            setCommunication(e.target.value);
+                        }}
+                        label="Commincation Skill"
+                        value={communication}
+                    />
+                    <Input
+                        type="text"
+                        onChange={(e) => {
+                            setDedication(e.target.value);
+                        }}
+                        label="Dedication"
+                        value={dedication}
+                    />
+                    <Input
+                        type="text"
+                        onChange={(e) => {
+                            setSkillAchieve(e.target.value);
+                        }}
+                        label="Skill & Achievement"
+                        value={skillAchieve}
+                    />
+                    <Input
+                        type="text"
+                        onChange={(e) => {
+                            setInterviewOverall(e.target.value);
+                        }}
+                        label="Interview Overall"
+                        value={interviewOverall}
+                    />
+                </div>
+                <Typography variant="h5" className="mb-3" color="blue-gray">
+                    Section
                 </Typography>
                 <div className="flex gap-4 flex-col">
                     <div className="flex flex-col gap-2">
