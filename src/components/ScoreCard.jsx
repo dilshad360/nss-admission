@@ -59,7 +59,7 @@ function ScoreCard({ base, stuid, data, clear }) {
         <Card className="mt-6 w-full">
             <CardBody className="">
                 <Typography variant="h5" className="mb-3" color="blue-gray">
-                    Interview Section
+                    Interview
                 </Typography>
                 <div className="flex gap-2 flex-col mb-4">
                     <Input
@@ -96,7 +96,7 @@ function ScoreCard({ base, stuid, data, clear }) {
                     />
                 </div>
                 <Typography variant="h5" className="mb-3" color="blue-gray">
-                    Section
+                    Selection
                 </Typography>
                 <div className="flex gap-4 flex-col">
                     <div className="flex flex-col gap-2">

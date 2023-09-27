@@ -9,6 +9,7 @@ function DataCard({data}) {
           {data.Name}
         </Typography>
         <Chip variant="outlined" value={data.DEPARTMENT} />
+        <Chip variant="ghost" value={data.CHEST_NO} />
       </CardBody>
     </Card>
   )
