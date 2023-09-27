@@ -75,7 +75,8 @@ function App() {
           type="text"
           label="Chest No"
           onChange={(e) => {
-            setSearchText(e.target.value);
+            const uppercasedValue = e.target.value.toUpperCase();
+            setSearchText(uppercasedValue);
           }}
           value={searchText}
         />
@@ -88,6 +89,7 @@ function App() {
           Search
         </Button>
       </div>
+
       {loading && <Spinner className="mt-4" />}
 
       {alert && (
