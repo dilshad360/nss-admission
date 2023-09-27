@@ -9,9 +9,9 @@ import { useState } from "react";
 
 function ScoreCard({ base, stuid, data, clear }) {
 
-    const [communication, setCommunication] = useState(data.COMMUNICATON !== undefined ? data.COMMUNICATON : '');
+    const [communication, setCommunication] = useState(data.COMMUNICATION !== undefined ? data.COMMUNICATION : '');
     const [dedication, setDedication] = useState(data.DEDICATION !== undefined ? data.DEDICATION : '');
-    const [skillAchieve, setSkillAchieve] = useState(data.SKILL_ACIEVEMENT !== undefined ? data.SKILL_ACIEVEMENT : '');
+    const [skillAchieve, setSkillAchieve] = useState(data.SKILL_ACHIEVEMENT !== undefined ? data.SKILL_ACHIEVEMENT : '');
     const [interviewOverall, setInterviewOverall] = useState(data.INTERVIEW_OVERALL !== undefined ? data.INTERVIEW_OVERALL : '');
     
 
@@ -67,7 +67,7 @@ function ScoreCard({ base, stuid, data, clear }) {
                         onChange={(e) => {
                             setCommunication(e.target.value);
                         }}
-                        label="Commincation Skill"
+                        label="Commuincation Skill"
                         value={communication}
                     />
                     <Input
